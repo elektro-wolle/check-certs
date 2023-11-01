@@ -21,6 +21,12 @@ For ease of use, you should add this script to your crontab:
 
 You'll get a mail with all certificate details if any new certificates appear in the CT-logs.
 
+## How it works
+
+The script uses the [crt.sh](https://crt.sh) API to get all certificates for the given domains.
+Then it downloads the certificates and stores the new ones in a local database.
+If a new certificate appears, you'll get a mail with all certificate details.
+
 ## References
 
 * https://blog.germancoding.com/2020/03/31/monitoring-certificate-issuance-with-the-power-of-certificate-transparency/ for the idea to use crt.sh instead of the official CT-logs.
