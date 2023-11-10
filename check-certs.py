@@ -120,11 +120,13 @@ class CrtSh:
         :param domains: list of domains, separated by", "to query crt.sh
         :return: a list of dicts with the results
         """
-        self.logger.debug(f"loading {domains} from crt.sh")
-        payload = {'Identity': domains, 'exclude': 'expired', 'output': 'json', 'match': 'ILIKE'}
+        self.logger.debug(f"loading '{domains}' from crt.sh")
+        payload = {'Identity': domains, 'exclude': 'expired', 'output': 'json'}
         r = self.session.get('https://crt.sh/', params=payload)
         r.raise_for_status()
-        return r.json()
+        found_certificates = r.json()
+        self.logger.debug(f"found {len(found_certificates)} certificates")
+        return found_certificates
 
     def load_cert_for_id(self, cert_id: str) -> bytes:
         """
